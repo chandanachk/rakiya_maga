@@ -49,7 +49,14 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        /*if(isset($_POST['ajax'])){
+            print_r("ssssssssssssss");exit;
+        }
+        */
+        
+        $model = new ContactForm();
+        return $this->render('index',['model' => $model]);
+       // print_r($this->render('index',['model' => $model]));exit;
     }
 
     public function actionLogin()
@@ -92,5 +99,14 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    public function actionCreatewidget(){
+          return $this->render('hellowidget');
+    }
+
+    public function actionSearch(){
+        print_r("SEarchvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");exit;
+        return $model = Jobs::find()->all();
+        
     }
 }

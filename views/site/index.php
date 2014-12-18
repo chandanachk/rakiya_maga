@@ -1,7 +1,28 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'My Yii Application';
+
+$this->title = 'JOB SEARCH';
 ?>
+
+<?php
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\helpers\Url;
+
+
+$form = ActiveForm::begin([
+    'id' => 'active-form',
+    'options' => [
+        'class' => 'form-horizontal',
+        'enctype' => 'multipart/form-data'
+        ],
+])
+/* ADD FORM FIELDS */
+
+
+?>
+
+
 <div class="site-index">
 
     <div class="jumbotron">
@@ -9,43 +30,57 @@ $this->title = 'My Yii Application';
 
         <p class="lead">COMMING SOON...</p>
 
-        <p><a class="btn btn-lg btn-success" href="">SEARCH JOB</a></p>
+        <!-- <p><a class="btn btn-lg btn-success" href="">SEARCH JOB</a></p> -->
     </div>
+    
+    <div class="control-group buttons">
+      <?php
 
+        echo $form->field($model, 'name')->textInput()->hint('Search Job')->label('Search');
+         
+      ?>
+      <div class="form-actions">
+          <?php echo Html::button( $content = 'Button', $options = ['id'=>'btnSearch','class'=>'btnSearch'] ); ?>
+      </div>
+            
+        
+    </div>
+<?php ActiveForm::end();?>
     <div class="body-content">
 
         <div class="row">
             <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+                
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+                
             </div>
         </div>
 
     </div>
 </div>
+
+
+
+<?php 
+$script = <<< JS
+$('#btnSearch').on('click', function(e) {
+  alert("sdfgdsf");
+  var form = $(this);
+    $.ajax({
+       url:form.attr('action'),
+       type:'POST',
+       contentType: "application/json; charset=utf-8",
+       dataType: "json",
+       data: {id: '12321', 'other': 'dfsdfsf'},
+       success: function(data) {
+           alert(data);
+       }
+    });
+});
+JS;
+$this->registerJs($script);
+?>
